@@ -89,11 +89,16 @@ interface Key {
 var i = 0;
 var velocity = 5;
 var field = new Field()
-var arr: Prop[] = [];
+var arr1: Prop[] = [];
+var arr2: Prop[] = [];
 for (var i = 0; i < 900; i++) {
-    var tmp = new Prop()
-    arr.push(tmp)
-    field.pushProp(tmp)
+    var tmp1 = new Prop()
+    arr1.push(tmp1)
+    field.pushProp(tmp1)
+
+    var tmp2 = new Prop()
+    arr2.push(tmp2)
+    field.pushProp(tmp2)
 }
 
 readline.emitKeypressEvents(process.stdin);
@@ -110,9 +115,13 @@ process.stdout.on('resize', () => {
 })
 
 setInterval(() => {
-    arr.forEach((prop: Prop, index: number) => {
+    arr1.forEach((prop: Prop, index: number) => {
         prop.setX(Math.floor((field.size.getX() / 2 / (index * 0.01)) * Math.cos((index * 2 + i) * (Math.PI / 180)) + (field.size.getX() / 2)))
         prop.setY(Math.floor((field.size.getY() / 2 / (index * 0.01)) * Math.sin((index * 2 + i) * (Math.PI / 180)) + (field.size.getY() / 2)))
+    })
+    arr2.forEach((prop: Prop, index: number) => {
+        prop.setX(Math.floor((field.size.getX() / 2 / (index * 0.01)) * Math.cos((index * 2 - i) * (Math.PI / 180)) + (field.size.getX() / 2)))
+        prop.setY(Math.floor((field.size.getY() / 2 / (index * 0.01)) * Math.sin((index * 2 - i) * (Math.PI / 180)) + (field.size.getY() / 2)))
     })
     Render.show2DArray(field.render())
     i += velocity
